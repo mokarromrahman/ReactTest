@@ -1,6 +1,6 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
 
 // let city = {
 //   "name": "Madrid",
@@ -67,7 +67,7 @@ import './index.css';
 // );
 
 // const lakeList = [
-  
+
 //     {id:"1", name:"Echo", trailhead:"Echo"},
 //     {id:"2", name:"Maud", trailhead:"Wrights"},
 //     {id:"3", name:"Velma", trailhead:"Bayview"}
@@ -93,21 +93,42 @@ import './index.css';
 //   document.getElementById("root")
 // );
 
-const list = [1,2,3,4,5];
+// const list = [1, 2, 3, 4, 5];
 
-//lakes has to be inside {} so that it is treated as an array and not an object
-function App({items})
-{
-return (
-  <ul>
-    {items.map(item => (
-      <li key={item.toString()}>{item}</li>
-    ))}
-  </ul>
-)
+// //lakes has to be inside {} so that it is treated as an array and not an object
+// function App({ items }) {
+//   return (
+//     <ul>
+//       {items.map((item) => (
+//         <li key={item.toString()}>{item}</li>
+//       ))}
+//     </ul>
+//   );
+// }
+
+// ReactDOM.render(<App items={list} />, document.getElementById("root"));
+
+function Lake() {
+  return (
+    <div>
+      <h1>Visit Jenny Lake!</h1>
+    </div>
+  );
 }
 
-ReactDOM.render(
-<App items={list} />,
-document.getElementById("root")
-);
+function SkiResort() {
+  return (
+    <div>
+      <h1>Visit Jackson Hole Mountain Resort!</h1>
+    </div>
+  );
+}
+
+function App(props) {
+  if (props.season === "summer") {
+    return <Lake />;
+  }
+
+  return <SkiResort />;
+}
+ReactDOM.render(<App season="winter" />, document.getElementById("root"));
