@@ -127,8 +127,8 @@ function SkiResort() {
 function App(props) {
   if (props.season === "summer") {
     return <Lake />;
+  } else if (props.season === "winter") {
+    return <SkiResort />;
   }
-
-  return <SkiResort />;
 }
 ReactDOM.render(<App season="winter" />, document.getElementById("root"));
