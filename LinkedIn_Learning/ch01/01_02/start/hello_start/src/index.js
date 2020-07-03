@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 
@@ -108,27 +108,104 @@ import "./index.css";
 
 // ReactDOM.render(<App items={list} />, document.getElementById("root"));
 
-function Lake() {
+// function Lake({ name }) {
+//   return (
+//     <div>
+//       <h1>Visit {name}!</h1>
+//     </div>
+//   );
+// }
+
+// function SkiResort({ name }) {
+//   return (
+//     <div>
+//       <h1>Visit {name}</h1>
+//     </div>
+//   );
+// }
+
+// // function App(props) {
+// //   if (props.season === "summer") {
+// //     return <Lake />;
+// //   } else if (props.season === "winter") {
+// //     return <SkiResort />;
+// //   }
+// // }
+
+// function App(props) {
+//   return (
+//     <div>
+//       {props.season === "summer" ? (
+//         <Lake name="Jenny Lake" />
+//       ) : props.season === "winter" ? (
+//         <SkiResort name="JLMR" />
+//       ) : (
+//         <h1>Come back in the winter or summer</h1>
+//       )}
+//     </div>
+//   );
+// }
+// ReactDOM.render(<App season="summer" />, document.getElementById("root"));
+
+// function Lake() {
+//   return <h1>Lake!</h1>;
+// }
+
+// function SkiResort() {
+//   return <h1>Ski Resort!</h1>;
+// }
+
+// function App(porps) {
+//   return (
+//     <>
+//       <Lake />
+//       <SkiResort />
+//     </>
+//   );
+// }
+
+// //ReactDOM.render(<App />, document.getElementById("root"));
+// ReactDOM.render(
+//   <>
+//     <Lake />
+//     <SkiResort />
+//   </>,
+//   document.getElementById("root")
+// );
+
+// const snacks = ["popcorn", "pretzels", "pineapple"];
+
+// const [first, second, third] = ["popcorn", "pretzels", "pineapple"];
+
+// console.log(first);
+// console.log(second);
+// console.log(third);
+// console.log([first, second, third]);
+
+// const [, , fruit] = ["popcorn", "pretzels", "pineapple"];
+// console.log(fruit);
+
+function App() {
+  //status is the state
+  //setStatus is the function to set the state
+  const [status, setStatus] = useState("Open");
   return (
     <div>
-      <h1>Visit Jenny Lake!</h1>
+      <h1>Status: {status}</h1>
+      <button className="btn-primary" onClick={() => setStatus("Open")}>
+        Open
+      </button>
+      <button className="btn-danger" onClick={() => setStatus("Closed")}>
+        Closed
+      </button>
+      <button
+        className="btn-warning"
+        onClick={() => setStatus("Back in 5 minutes.")}
+      >
+        Break
+      </button>
     </div>
   );
 }
 
-function SkiResort() {
-  return (
-    <div>
-      <h1>Visit Jackson Hole Mountain Resort!</h1>
-    </div>
-  );
-}
-
-function App(props) {
-  if (props.season === "summer") {
-    return <Lake />;
-  } else if (props.season === "winter") {
-    return <SkiResort />;
-  }
-}
-ReactDOM.render(<App season="winter" />, document.getElementById("root"));
+ReactDOM.render(<App />, document.getElementById("root"));
