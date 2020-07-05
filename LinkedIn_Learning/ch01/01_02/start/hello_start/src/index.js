@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 
@@ -185,27 +185,91 @@ import "./index.css";
 // const [, , fruit] = ["popcorn", "pretzels", "pineapple"];
 // console.log(fruit);
 
-function App() {
-  //status is the state
-  //setStatus is the function to set the state
-  const [status, setStatus] = useState("Open");
+// function App() {
+//   //status is the state
+//   //setStatus is the function to set the state
+//   const [status, setStatus] = useState("Open");
+//   return (
+//     <div>
+//       <h1>Status: {status}</h1>
+//       <button className="btn-primary" onClick={() => setStatus("Open")}>
+//         Open
+//       </button>
+//       <button className="btn-danger" onClick={() => setStatus("Closed")}>
+//         Closed
+//       </button>
+//       <button
+//         className="btn-warning"
+//         onClick={() => setStatus("Back in 5 minutes.")}
+//       >
+//         Break
+//       </button>
+//     </div>
+//   );
+// }
+
+// ReactDOM.render(<App />, document.getElementById("root"));
+
+//multiple state values
+// function App() {
+//   const [year, setYear] = useState(2050);
+//   const [manager, setManager] = useState("Alex");
+//   //status is the state
+//   //setStatus is the function to set the state
+//   const [status, setStatus] = useState("Open");
+//   return (
+//     <>
+//       <div>
+//         <h1>{year}</h1>
+//         <button className="btn-primary" onClick={() => setYear(year + 1)}>
+//           New Year
+//         </button>
+//       </div>
+//       <div>
+//         <h1>Manager on Duty: {manager}</h1>
+//         <button className="btn-primary" onClick={() => setManager("Jose")}>
+//           New Manager
+//         </button>
+//       </div>
+//       <div>
+//         <h1>Status: {status}</h1>
+//         <button className="btn-primary" onClick={() => setStatus("Open")}>
+//           Open
+//         </button>
+//         <button className="btn-danger" onClick={() => setStatus("Closed")}>
+//           Closed
+//         </button>
+//         <button
+//           className="btn-warning"
+//           onClick={() => setStatus("Back in 5 minutes.")}
+//         >
+//           Break
+//         </button>
+//       </div>
+//     </>
+//   );
+// }
+
+// ReactDOM.render(<App />, document.getElementById("root"));
+
+function Checkbox() {
+  const [checked, setCheck] = useState(false);
+
+  //things that we want the a component to do other than
+  //return UI is called an effect ie. console.log, alert, api call?(not sure about this one)
+  useEffect(() => {
+    alert(`checked: ${checked.toString()}`);
+  });
   return (
-    <div>
-      <h1>Status: {status}</h1>
-      <button className="btn-primary" onClick={() => setStatus("Open")}>
-        Open
-      </button>
-      <button className="btn-danger" onClick={() => setStatus("Closed")}>
-        Closed
-      </button>
-      <button
-        className="btn-warning"
-        onClick={() => setStatus("Back in 5 minutes.")}
-      >
-        Break
-      </button>
-    </div>
+    <>
+      <input
+        type="checkbox"
+        value={checked}
+        onChange={() => setCheck((checked) => !checked)}
+      />
+      {checked ? "checked" : "not checked"}
+    </>
   );
 }
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(<Checkbox />, document.getElementById("root"));
