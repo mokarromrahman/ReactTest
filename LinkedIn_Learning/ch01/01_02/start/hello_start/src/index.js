@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useReducer } from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 
@@ -307,33 +307,49 @@ import "./index.css";
 // }
 // ReactDOM.render(<App />, document.getElementById("root"));
 
-function GitHubUser({ login }) {
-  const [data, setData] = useState(null);
-  useEffect(() => {
-    fetch(`https://api.github.com/users/${login}`)
-      .then((res) => res.json())
-      .then(setData)
-      .catch(console.error);
-  });
+// function GitHubUser({ login }) {
+//   const [data, setData] = useState(null);
+//   useEffect(() => {
+//     fetch(`https://api.github.com/users/${login}`)
+//       .then((res) => res.json())
+//       .then(setData)
+//       .catch(console.error);
+//   });
 
-  if (data) {
-    //return <div>{JSON.stringify(data)}</div>;
-    return (
-      <div>
-        <h1>
-          {data.name} - {data.login}
-        </h1>
-        <h2>{data.bio}</h2>
-        <h3>{data.blog}</h3>
-        <img src={data.avatar_url} width={100} alt="Profile Picture" />
-      </div>
-    );
-  }
+//   if (data) {
+//     //return <div>{JSON.stringify(data)}</div>;
+//     return (
+//       <div>
+//         <h1>
+//           {data.name} - {data.login}
+//         </h1>
+//         <h2>{data.bio}</h2>
+//         <h3>{data.blog}</h3>
+//         <img src={data.avatar_url} width={100} alt="Profile Picture" />
+//       </div>
+//     );
+//   }
 
-  return null;
+//   return null;
+// }
+// function App() {
+//   return <GitHubUser login="mokarromrahman" />;
+// }
+
+// ReactDOM.render(<App />, document.getElementById("root"));
+
+function Checkbox() {
+  //reducer takes in current state and returns a new state
+  //first arguement is toggle function
+  //2nd arguement is initial state
+  const [checked, toggle] = useReducer((checked) => !checked, false);
+
+  return (
+    <>
+      <input type="checkbox" onChange={toggle} />
+      {checked ? "checked" : "not checked"}
+    </>
+  );
 }
-function App() {
-  return <GitHubUser login="mokarromrahman" />;
-}
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(<Checkbox />, document.getElementById("root"));
