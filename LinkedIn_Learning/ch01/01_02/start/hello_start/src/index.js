@@ -252,24 +252,88 @@ import "./index.css";
 
 // ReactDOM.render(<App />, document.getElementById("root"));
 
-function Checkbox() {
-  const [checked, setCheck] = useState(false);
+// function Checkbox() {
+//   const [checked, setCheck] = useState(false);
 
-  //things that we want the a component to do other than
-  //return UI is called an effect ie. console.log, alert, api call?(not sure about this one)
+//   //things that we want the a component to do other than
+//   //return UI is called an effect ie. console.log, alert, api call?(not sure about this one)
+//   useEffect(() => {
+//     alert(`checked: ${checked.toString()}`);
+//   });
+//   return (
+//     <>
+//       <input
+//         type="checkbox"
+//         value={checked}
+//         onChange={() => setCheck((checked) => !checked)}
+//       />
+//       {checked ? "checked" : "not checked"}
+//     </>
+//   );
+// }
+
+// ReactDOM.render(<Checkbox />, document.getElementById("root"));
+
+// function App() {
+//   const [val, setVal] = useState("");
+//   const [val2, setVal2] = useState("");
+
+//   //2nd arguement in useEffect is called dependency array
+//   useEffect(() => {
+//     console.log(`field 1: ${val}`);
+//   }, [val]); //adding [val] in the dependency array makes it so that we only fire this effect when val is changed
+
+//   useEffect(() => {
+//     console.log(`field 2: ${val2}`);
+//   }, [val2]);
+
+//   //this one fires whenever val and val2 are affected
+//   // useEffect(() => {
+//   //   console.log(`field 2: ${val2}`);
+//   // }, [val,val2]);
+//   return (
+//     <>
+//       <label>
+//         Favorite Phrase:
+//         <input value={val} onChange={(e) => setVal(e.target.value)} />
+//       </label>
+//       <br />
+//       <label>
+//         Second Favorite Phrase:
+//         <input value={val2} onChange={(e) => setVal2(e.target.value)} />
+//       </label>
+//     </>
+//   );
+// }
+// ReactDOM.render(<App />, document.getElementById("root"));
+
+function GitHubUser({ login }) {
+  const [data, setData] = useState(null);
   useEffect(() => {
-    alert(`checked: ${checked.toString()}`);
+    fetch(`https://api.github.com/users/${login}`)
+      .then((res) => res.json())
+      .then(setData)
+      .catch(console.error);
   });
-  return (
-    <>
-      <input
-        type="checkbox"
-        value={checked}
-        onChange={() => setCheck((checked) => !checked)}
-      />
-      {checked ? "checked" : "not checked"}
-    </>
-  );
+
+  if (data) {
+    //return <div>{JSON.stringify(data)}</div>;
+    return (
+      <div>
+        <h1>
+          {data.name} - {data.login}
+        </h1>
+        <h2>{data.bio}</h2>
+        <h3>{data.blog}</h3>
+        <img src={data.avatar_url} width={100} alt="Profile Picture" />
+      </div>
+    );
+  }
+
+  return null;
+}
+function App() {
+  return <GitHubUser login="mokarromrahman" />;
 }
 
-ReactDOM.render(<Checkbox />, document.getElementById("root"));
+ReactDOM.render(<App />, document.getElementById("root"));
